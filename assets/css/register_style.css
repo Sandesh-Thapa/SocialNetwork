@@ -1,0 +1,138 @@
+@font-face {
+  font-family: "Roboto-Medium";
+  src: url("../fonts/Roboto-Medium.ttf");
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+}
+
+header {
+  background-color: #dd123d;
+  padding: 10px 0;
+  height: 10vh;
+}
+
+header h1 {
+  color: rgb(253, 228, 233);
+}
+
+header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.login input[type="email"],
+.login input[type="password"] {
+  padding: 3.5px;
+  outline: none;
+  border: none;
+}
+
+.login input[type="submit"] {
+  border-radius: 3px;
+  padding: 3px 4px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  color: rgb(74, 74, 74);
+  background: #fd1949;
+}
+
+main {
+  height: 90vh;
+  background: url("../images/bg.jpg") no-repeat center center/cover;
+  position: relative;
+}
+
+main .overlay {
+  background: rgba(0, 0, 0, 0.9);
+  width: 100%;
+  height: 100%;
+}
+
+main .showcase {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: #fff;
+}
+
+main .showcase .container {
+  display: flex;
+  align-items: center;
+  height: 90vh;
+}
+main .showcase .container .show {
+  flex: 3;
+  font-size: 2em;
+}
+
+main .showcase .container .show h2 {
+  font-family: "Roboto-Medium";
+  font-weight: 300;
+}
+
+main .showcase .container .show .footnote {
+  margin-top: 50px;
+}
+
+main .showcase .container .show .footnote h4 {
+  font-size: 1.5rem;
+  font-family: "Roboto-Medium";
+  font-weight: 20;
+  margin: 15px 0;
+  color: rgb(189, 186, 186);
+}
+
+main .showcase .container .register {
+  flex: 1;
+}
+
+main .showcase .container .register .form {
+  background: #fff;
+  padding: 10px;
+  color: #000;
+  border-bottom: 5px solid #dd123d;
+}
+
+main .showcase .container .register .form h4 {
+  text-align: center;
+  font-size: 1.2rem;
+  margin: 5px 0;
+}
+
+main .showcase .container .register .form input[type="text"],
+main .showcase .container .register .form input[type="email"],
+main .showcase .container .register .form input[type="password"] {
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 5px;
+  outline: none;
+}
+
+main .showcase .container .register .form input[type="submit"] {
+  background: #dd123d;
+  width: 100%;
+  text-align: center;
+  padding: 8px;
+  border: none;
+  color: #fff;
+  font-family: "Roboto-Medium";
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+main .showcase .container .register .form input[type="submit"]:hover {
+  background: #fc0d41;
+}

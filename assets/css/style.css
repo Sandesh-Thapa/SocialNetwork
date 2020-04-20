@@ -1,0 +1,315 @@
+@font-face {
+  font-family: "Roboto-Medium";
+  src: url("../fonts/Roboto-Medium.ttf");
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto-Medium";
+}
+
+body {
+  background: #e9ebee;
+}
+
+header {
+  background: #dd123d;
+  width: 100%;
+  padding: 5px;
+  border-bottom: solid 1px rgb(150, 149, 149);
+}
+
+.header {
+  position: fixed;
+  z-index: 5;
+  top: 0;
+  left: 0;
+}
+
+.container {
+  width: 90%;
+  margin: 0 auto;
+}
+
+header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+header .logo {
+  flex: 1;
+}
+
+header .searchbar {
+  flex: 2;
+}
+
+header .searchbar input[type="text"] {
+  width: 90%;
+  padding: 5px 50px 5px 5px;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+}
+
+header .searchbar button {
+  padding: 7px 15px;
+  border: none;
+  background: rgb(182, 17, 17);
+  margin-left: -47px;
+  cursor: pointer;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  color: rgb(194, 192, 192);
+}
+
+header .tools {
+  flex: 2;
+}
+
+header .tools img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  position: absolute;
+  margin-left: -35px;
+}
+
+header .tools .name {
+  font-size: 15px;
+  color: #fff;
+}
+
+header .tools a {
+  text-decoration: none;
+  color: #000;
+  font-size: 1.3rem;
+  margin: 0 5px;
+  font-family: "Roboto-Medium";
+}
+
+header .tools a:hover {
+  color: rgb(99, 98, 98);
+}
+
+.post {
+  width: 60%;
+  height: 90px;
+  background: #fff;
+  margin: 5px auto;
+  margin-top: 60px;
+  margin-bottom: 15px;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 2px 2px 1px #d3d3d3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+.post img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.post .profile-image {
+  background: red;
+  width: 10%;
+  position: relative;
+}
+
+.post .form {
+  width: 90%;
+}
+
+.post textarea {
+  border: none;
+  resize: none;
+  width: 75%;
+  height: 50px;
+  font-family: "Roboto-Medium";
+  font-size: 15px;
+  position: absolute;
+  top: 30px;
+  outline: none;
+}
+
+.post input[type="submit"] {
+  float: right;
+  margin-right: 10px;
+  width: 90px;
+  height: 50px;
+  border-radius: 10px;
+  background: #dd123d;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  outline: none;
+}
+
+.post input[type="submit"]:hover {
+  background: #f75c7d;
+}
+
+.post input[type="submit"]:active {
+  padding: 5px 4px 4px 5px;
+}
+
+/* status section */
+.status-post {
+  background: #fff;
+  width: 40%;
+  margin: 10px 20% 0px 20%;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  padding: 5px;
+  position: relative;
+}
+
+.status-post .title {
+  display: flex;
+  align-items: center;
+}
+
+.status-post .post-profile-pic {
+  padding: 5px 10px;
+}
+
+.status-post .post-profile-pic img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.status-post .title .posted-by a {
+  text-decoration: none;
+  color: #dd123d;
+}
+
+.status-post .title .posted-by a:hover {
+  text-decoration: underline;
+}
+
+.status-post .title .posted-by p {
+  color: #827f7f;
+  font-size: 10px;
+}
+
+.status-post .post-body {
+  margin: 5px 15px;
+}
+
+.status-post .line {
+  width: 95%;
+  height: 1px;
+  background-color: #ccc;
+  margin: 20px 2.5% 5px 2.5%;
+}
+
+.status-post .like-comment {
+  width: 95%;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  padding: 2px 0;
+}
+
+.status-post .btn {
+  width: 50%;
+  background: #fff;
+  border: none;
+  padding: 5px 0;
+  outline: none;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.status-post .btn:hover {
+  background: #ccc;
+}
+
+.toggle-comment {
+  background: #fff;
+  display: none;
+  width: 40%;
+  margin: 0px 20% 0px 20%;
+  padding: 5px;
+  border-top: 1px solid #ccc;
+}
+
+.toggle-comment .comment-iframe {
+  width: 100%;
+  background: #fff;
+}
+
+.posts-section .comment-container {
+  background: #fff;
+  width: 40%;
+  margin: 0 20%;
+  padding: 10px 15px;
+  display: flex;
+  align-items: center;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-top: solid 1px #ccc;
+}
+
+.posts-section .comment-container .loggedin-profile-pic img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.posts-section .comment-container form {
+  width: 100%;
+  margin-left: 10px;
+  position: relative;
+}
+
+.posts-section .comment-container form button {
+  position: absolute;
+  padding: 6px 20px 7px 10px;
+  right: 1px;
+  top: 1px;
+  border: none;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.posts-section .comment-container form input[type="text"] {
+  width: 100%;
+  border-radius: 20px;
+  padding: 5px 50px 5px 10px;
+  height: 30px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+.load-message {
+  width: 60%;
+  padding: 10px;
+  margin: 5px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.noposts {
+  width: 40%;
+  margin-left: 20%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  color: #827f7f;
+  text-align: center;
+}
