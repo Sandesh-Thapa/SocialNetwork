@@ -9,6 +9,8 @@ if (isset($_POST['post'])) {
 	$post->submitPost($_POST['post_text'], 'none');
 }
 
+
+
 ?>
 
 </div>
@@ -32,12 +34,8 @@ if (isset($_POST['post'])) {
 </div>
 
 
-
-
-
 <script>
 	var userLoggedIn = '<?php echo $userLoggedIn; ?>';
-
 	$(document).ready(function() {
 
 		$('#loading').show();

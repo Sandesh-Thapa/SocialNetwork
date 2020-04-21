@@ -105,7 +105,7 @@ class Post
 					$profile_pic = $user_row['profile_pic'];
 
 ?>
-
+					<!-- <script src="../../assets/js/jquery.min.js"></script> -->
 					<script>
 						function toggle<?php echo $id; ?>() {
 							var element = document.getElementById("toggleComment<?php echo $id; ?>");
@@ -114,6 +114,42 @@ class Post
 								element.style.display = "none";
 							else
 								element.style.display = "block";
+						}
+
+						function showPostBody<?php echo $id; ?>(postbody) {
+							return postbody;
+						}
+
+						function postComment<?php echo $id; ?>() {
+							var textbox = document.getElementById("post_body<?php echo $id; ?>");
+							var postBody = document.getElementById("post_body<?php echo $id; ?>").value;
+							var postid = document.getElementById("post_id<?php echo $id; ?>").value;
+							var successMsg = document.getElementById("success<?php echo $id; ?>");
+
+							if (postBody != "") {
+								var xhr = new XMLHttpRequest();
+								xhr.onreadystatechange = function() {
+									if (this.readyState == 4 && this.status == 200) {
+										successMsg.style.display = "block";
+										successMsg.innerHTML = this.responseText;
+										setTimeout(function() {
+											successMsg.style.display = "none"
+										}, 3000);
+										textbox.value = '';
+									}
+								}
+								xhr.open("GET", "includes/handlers/ajax_post_comments.php?postBody=" + postBody + "&postid=" + postid, true);
+								xhr.send();
+								postBody.value = "";
+							} else {
+								successMsg.innerHTML = "Type Comment First";
+								successMsg.style.display = "block";
+								setTimeout(function() {
+									successMsg.style.display = "none"
+								}, 3000);
+							}
+
+
 						}
 					</script>
 
@@ -198,10 +234,16 @@ class Post
 								<div class='loggedin-profile-pic'>
 									<img src='$userLoggedProfilePic'>
 								</div>
-								<form action='comment_frame.php?post_id=$id' id='comment_form' method='POST'>
-										<input type='text' name='post_body' placeholder='Write a comment...'>
-										<button type='submit' name='postComment$id'><i class='fas fa-paper-plane'></i></button>
-								</form>
+								<div class='comment-form'>
+									<div class='form'>
+										<textarea id='post_body$id' placeholder='Write a comment...' autocomplete='off'></textarea>
+										<input type='hidden' id='post_id$id' value='$id'>
+										<button name='submit' id='submit$id' onClick='postComment$id()'><i class='fas fa-paper-plane'></i></button>
+									</div>
+									<h3 class='success-message' id='success$id'></h3>
+								</div>
+			
+								
 							</div>
 						";
 				}

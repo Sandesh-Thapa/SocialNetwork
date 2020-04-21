@@ -37,16 +37,16 @@ if (isset($_SESSION['username'])) {
 				</form>
 			</div>
 			<div class="tools">
-				<a href="<?php echo $userLoggedIn; ?>" class="name">
+				<a href="<?php echo $userLoggedIn; ?>" class="name" title="Profile">
 					<img src="<?php echo $user['profile_pic']; ?>">
 					<?php echo $user['first_name']; ?>
 				</a>
-				<a href="index.php"> <i class="fas fa-home"></i></a>
-				<a href="#"> <i class="fas fa-user-friends"></i></a>
-				<a href="#"> <i class="fas fa-envelope"></i></a>
-				<a href="#"> <i class="fas fa-bell"></i></a>
-				<a href="#"> <i class="fas fa-cog"></i></a>
-				<a href="includes/handlers/logout.php"> <i class="fas fa-sign-out-alt"></i></a>
+				<a href="index.php" title="Home"> <i class="fas fa-home"></i></a>
+				<a href="#" title="Friend Request"> <i class="fas fa-user-friends"></i></a>
+				<a href="#" title="Messsage"> <i class="fas fa-envelope"></i></a>
+				<a href="#" title="Notification"> <i class="fas fa-bell"></i></a>
+				<a href="#" title="Settings"> <i class="fas fa-cog"></i></a>
+				<a href="includes/handlers/logout.php" title="Log out"> <i class="fas fa-sign-out-alt"></i></a>
 			</div>
 		</div>
 	</header>
