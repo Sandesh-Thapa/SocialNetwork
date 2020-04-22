@@ -104,9 +104,39 @@ class Post
 					$last_name = $user_row['last_name'];
 					$profile_pic = $user_row['profile_pic'];
 
+					$comments_check = mysqli_query($this->con, "SELECT * FROM comments WHERE post_id = '$id'");
+					$comments_check_num = mysqli_num_rows($comments_check);
+
+					$like_check = mysqli_query($this->con, "SELECT * FROM likes WHERE post_id='$id'");
+					$like_check_num = mysqli_num_rows($like_check);
+
+					$liked_by_me = mysqli_query($this->con, "SELECT * FROM likes WHERE username='$userLoggedIn' AND post_id='$id'");
+					$check_liked_by_me = mysqli_num_rows($liked_by_me);
+
+					if ($check_liked_by_me > 0) {
+						// echo '<script type="text/Javascript">
+						// 		var liked = document.getElementById("like-btn". $id .");
+						// 		liked.style.color = "#dd123d;";
+						// 		liked.innerHTML = "<i class="far fa-thumbs-up"></i> Liked (". $like_check_num)";
+
+						// 	  </script>';
+
+						echo "<script type='text/Javascript'>
+						 		likedPost();
+						 	  </script>";
+					}
+
 ?>
 					<!-- <script src="../../assets/js/jquery.min.js"></script> -->
 					<script>
+						function likedPost() {
+							var numLikes = <?php echo $like_check_num; ?>;
+							var element = document.getElementById("like-btn<?php echo $id; ?>");
+							element.style.color = "#dd123d";
+							element.innerHTML = "<i class='far fa-thumbs-up'></i> Liked (" + numLikes + ")</button>";
+
+						}
+
 						function toggle<?php echo $id; ?>() {
 							var element = document.getElementById("toggleComment<?php echo $id; ?>");
 
@@ -116,8 +146,33 @@ class Post
 								element.style.display = "block";
 						}
 
-						function showPostBody<?php echo $id; ?>(postbody) {
-							return postbody;
+
+						function likePost<?php echo $id; ?>() {
+							var postid = <?php echo $id; ?>;
+							var btn = document.getElementById("like-btn<?php echo $id; ?>");
+							//alert("Post id: " + postid);	
+							var xhr = new XMLHttpRequest();
+							xhr.onreadystatechange = function() {
+								if (this.readyState == 4 && this.status == 200) {
+									// btn.style.color = "red";
+									// btn.innerHTML = "<i class='far fa-thumbs-up'></i> Liked";
+									var statusMessage = this.responseText;
+									var result = JSON.parse(statusMessage);
+									//console.log(result);
+									if (result[1] == "Liked") {
+										btn.style.color = "#dd123d";
+										btn.innerHTML = "<i class='far fa-thumbs-up'></i> Liked (" + result[0] + ")";
+									} else //if (result[1] == "Like") 
+									{
+										btn.style.color = "#000";
+										btn.innerHTML = "<i class='far fa-thumbs-up'></i> Like (" + result[0] + ")";
+									}
+								}
+							}
+							xhr.open("GET", "includes/handlers/ajax_like_posts.php?&postid=" + postid, true);
+							xhr.send();
+
+
 						}
 
 						function postComment<?php echo $id; ?>() {
@@ -154,6 +209,8 @@ class Post
 					</script>
 
 <?php
+
+
 					//Timeframe
 					$date_time_now = date("Y-m-d H:i:s");
 					$start_date = new DateTime($date_time); //Time of post
@@ -223,8 +280,8 @@ class Post
 								</div>
 								<div class='line'></div>
 								<div class='like-comment'>
-									<button class='btn like-btn'><i class='far fa-thumbs-up'></i> Like</button>
-									<button class='btn comment-btn' onClick='javascript:toggle$id()'><i class='far fa-comment'></i> Comment</button>
+									<button class='btn' id='like-btn$id' onClick='likePost$id()'><i class='far fa-thumbs-up'></i> Like ($like_check_num)</button>
+									<button class='btn' id='comment-btn$id()' onClick='javascript:toggle$id()'><i class='far fa-comment'></i> Comment ($comments_check_num)</button>
 								</div>
 							</div>
 							<div id='toggleComment$id' class='toggle-comment'>

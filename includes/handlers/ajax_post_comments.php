@@ -23,16 +23,3 @@ if (mysqli_query($con, "INSERT INTO comments VALUES ('', '$post_body', '$userLog
 } else {
     echo "Something went wrong";
 }
-
-
-
-
-
-
-// function test_input($data)
-// {
-//     $data = trim($data);
-//     $data = stripslashes($data);
-//     $data = htmlspecialchars($data);
-//     return $data;
-// }

@@ -120,6 +120,8 @@ if (isset($_SESSION['username'])) {
             <p class="time-message"> <?php echo $time_message; ?></p>
     <?php
         }
+    } else {
+        echo "<p class='no-comments'>No Comments to Show!</p>";
     }
 
     ?>
