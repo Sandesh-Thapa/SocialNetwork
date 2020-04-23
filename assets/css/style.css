@@ -386,3 +386,80 @@ header .tools a:hover {
   color: #827f7f;
   text-align: center;
 }
+
+/* profile page */
+.showcase {
+  margin-top: 7vh;
+  margin-left: 10%;
+  position: relative;
+}
+
+.showcase .cover-pic img {
+  width: 65%;
+  border-radius: 5px;
+  border: 2px solid #ccc;
+  height: 50vh;
+}
+
+.showcase .profile-pic {
+  position: absolute;
+  bottom: 5px;
+  left: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.showcase .profile-pic img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 3px solid #fff;
+}
+
+.showcase .profile-pic a {
+  text-decoration: none;
+  color: #fff;
+  margin-left: 30px;
+  font-size: 35px;
+  margin-top: 50px;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.showcase .add-remove {
+  position: absolute;
+  right: 460px;
+  bottom: 40px;
+}
+
+.showcase .add-remove .btn {
+  padding: 5px 15px;
+  cursor: pointer;
+  border: none;
+}
+
+/* user closed */
+.userclosed {
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  text-align: center;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  border-radius: 10px;
+  padding: 50px;
+}
+
+.userclosed h4 {
+  margin-bottom: 10px;
+  font-size: 1.3rem;
+  color: rgb(53, 53, 53);
+}
+
+.userclosed a {
+  text-decoration: none;
+  color: #dd123d;
+}
+
+.userclosed a:hover {
+  text-decoration: underline;
+}
