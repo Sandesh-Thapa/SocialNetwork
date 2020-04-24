@@ -463,3 +463,70 @@ header .tools a:hover {
 .userclosed a:hover {
   text-decoration: underline;
 }
+
+/* friend request page */
+.friend-requests {
+  margin-top: 80px;
+  margin-left: 100px;
+  width: 60%;
+  background-color: #fff;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.friend-requests .friend-request-header .requests {
+  text-align: center;
+  margin-top: 5px;
+  border-bottom: 1px solid #e9ebee;
+  padding: 5px 0px;
+  font-weight: 500;
+}
+
+.friend-requests .all-friend-requests {
+  display: flex;
+  align-items: center;
+  margin: 10px auto;
+  width: 95%;
+  padding: 5px;
+  border-bottom: 1px solid #e9ebee;
+}
+
+.friend-requests .requested-img {
+  width: 12%;
+}
+
+.friend-requests .requested-img img {
+  width: 80px;
+  height: 80px;
+}
+
+.friend-requests .requested-name {
+  width: 60%;
+}
+
+.friend-requests .requested-name a {
+  text-decoration: none;
+  color: #dd123d;
+  font-size: 1.2rem;
+  font-weight: 300;
+}
+
+.friend-requests .requested-name a:hover {
+  text-decoration: underline;
+}
+
+.friend-requests .all-friend-requests form input[type="submit"] {
+  padding: 7px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.friend-requests .all-friend-requests form .accept-btn {
+  background: #dd123d;
+  color: #fff;
+  border: none;
+}
+
+.friend-requests .all-friend-requests form .ignore-btn {
+  border: 1px solid #ccc;
+}

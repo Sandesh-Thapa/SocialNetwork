@@ -26,7 +26,7 @@ if (isset($_POST['cancel_request'])) {
 }
 
 if (isset($_POST['respond_request'])) {
-    header("Location: requests.php");
+    header("Location: request.php");
 }
 
 ?>
