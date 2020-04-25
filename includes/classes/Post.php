@@ -75,7 +75,7 @@ class Post
 				} else {
 					$user_to_obj = new User($this->con, $row['user_to']);
 					$user_to_name = $user_to_obj->getFirstAndLastName();
-					$user_to = "<i class='fas fa-caret-right.'></i>&nbsp;<a href='" . $row['user_to'] . "'>" . $user_to_name . "</a>";
+					$user_to = "<i class='fas fa-caret-right'></i>&nbsp;<a href='" . $row['user_to'] . "'>" . $user_to_name . "</a>";
 				}
 
 				//Check if user who posted, has their account closed
@@ -98,6 +98,13 @@ class Post
 						$count++;
 					}
 
+					if ($userLoggedIn == $added_by)
+						$delete_button = "<div class='delete-button'>
+											<button id='delete-post$id' title='Delete Post' onClick='openModal$id()'>&times;</button>
+										</div>";
+					else
+						$delete_button = "";
+
 					$user_details_query = mysqli_query($this->con, "SELECT first_name, last_name, profile_pic FROM users WHERE username='$added_by'");
 					$user_row = mysqli_fetch_array($user_details_query);
 					$first_name = $user_row['first_name'];
@@ -114,102 +121,10 @@ class Post
 					$check_liked_by_me = mysqli_num_rows($liked_by_me);
 
 					if ($check_liked_by_me > 0) {
-						// echo '<script type="text/Javascript">
-						// 		var liked = document.getElementById("like-btn". $id .");
-						// 		liked.style.color = "#dd123d;";
-						// 		liked.innerHTML = "<i class="far fa-thumbs-up"></i> Liked (". $like_check_num)";
-
-						// 	  </script>';
-
 						echo "<script type='text/Javascript'>
 						 		likedPost();
 						 	  </script>";
 					}
-
-?>
-					<!-- <script src="../../assets/js/jquery.min.js"></script> -->
-					<script>
-						function likedPost() {
-							var numLikes = <?php echo $like_check_num; ?>;
-							var element = document.getElementById("like-btn<?php echo $id; ?>");
-							element.style.color = "#dd123d";
-							element.innerHTML = "<i class='far fa-thumbs-up'></i> Liked (" + numLikes + ")</button>";
-
-						}
-
-						function toggle<?php echo $id; ?>() {
-							var element = document.getElementById("toggleComment<?php echo $id; ?>");
-
-							if (element.style.display == "block")
-								element.style.display = "none";
-							else
-								element.style.display = "block";
-						}
-
-
-						function likePost<?php echo $id; ?>() {
-							var postid = <?php echo $id; ?>;
-							var btn = document.getElementById("like-btn<?php echo $id; ?>");
-							//alert("Post id: " + postid);	
-							var xhr = new XMLHttpRequest();
-							xhr.onreadystatechange = function() {
-								if (this.readyState == 4 && this.status == 200) {
-									// btn.style.color = "red";
-									// btn.innerHTML = "<i class='far fa-thumbs-up'></i> Liked";
-									var statusMessage = this.responseText;
-									var result = JSON.parse(statusMessage);
-									//console.log(result);
-									if (result[1] == "Liked") {
-										btn.style.color = "#dd123d";
-										btn.innerHTML = "<i class='far fa-thumbs-up'></i> Liked (" + result[0] + ")";
-									} else //if (result[1] == "Like") 
-									{
-										btn.style.color = "#000";
-										btn.innerHTML = "<i class='far fa-thumbs-up'></i> Like (" + result[0] + ")";
-									}
-								}
-							}
-							xhr.open("GET", "includes/handlers/ajax_like_posts.php?&postid=" + postid, true);
-							xhr.send();
-
-
-						}
-
-						function postComment<?php echo $id; ?>() {
-							var textbox = document.getElementById("post_body<?php echo $id; ?>");
-							var postBody = document.getElementById("post_body<?php echo $id; ?>").value;
-							var postid = document.getElementById("post_id<?php echo $id; ?>").value;
-							var successMsg = document.getElementById("success<?php echo $id; ?>");
-
-							if (postBody != "") {
-								var xhr = new XMLHttpRequest();
-								xhr.onreadystatechange = function() {
-									if (this.readyState == 4 && this.status == 200) {
-										successMsg.style.display = "block";
-										successMsg.innerHTML = this.responseText;
-										setTimeout(function() {
-											successMsg.style.display = "none"
-										}, 3000);
-										textbox.value = '';
-									}
-								}
-								xhr.open("GET", "includes/handlers/ajax_post_comments.php?postBody=" + postBody + "&postid=" + postid, true);
-								xhr.send();
-								postBody.value = "";
-							} else {
-								successMsg.innerHTML = "Type Comment First";
-								successMsg.style.display = "block";
-								setTimeout(function() {
-									successMsg.style.display = "none"
-								}, 3000);
-							}
-
-
-						}
-					</script>
-
-<?php
-
 
 					//Timeframe
 					$date_time_now = date("Y-m-d H:i:s");
@@ -274,7 +189,9 @@ class Post
 										<a href='$added_by'> $first_name $last_name </a> &nbsp;$user_to
 										<p>$time_message</p>
 									</div>
+									$delete_button
 								</div>
+								
 								<div class='post-body'>
 									$body
 								</div>
@@ -299,11 +216,143 @@ class Post
 									</div>
 									<h3 class='success-message' id='success$id'></h3>
 								</div>
-			
-								
+							</div>
+
+							<div id='modal$id' class='modal'>
+								<div class='modal-content'>
+									<div class='modal-header'>
+										<h2>Delete Post</h2>
+										<span class='close' onClick='closeModal$id()'>&times;</span>
+									</div>
+									<div class='modal-body'>
+										<p>Are you sure you want to delete this post?</p>
+										<div class='yes-no'>
+											<button id='delete$id' onClick='deletePost$id()'><i class='far fa-trash-alt'></i> Yes, delete it</button>
+											<button onClick='closeModal$id()'>Cancel</button>
+										</div>
+									</div>
+								</div>
 							</div>
 						";
 				}
+
+?>
+				<script>
+					window.addEventListener('click', outsideClick);
+					// Close If Outside Click
+					function outsideClick(e) {
+						var modal = document.getElementById("modal<?php echo $id; ?>");
+						if (e.target == modal) {
+							modal.style.display = 'none';
+						}
+					}
+
+					function openModal<?php echo $id; ?>() {
+						var modal = document.getElementById("modal<?php echo $id; ?>");
+						modal.style.display = "block";
+					}
+
+					function closeModal<?php echo $id; ?>() {
+						var modal = document.getElementById("modal<?php echo $id; ?>");
+						modal.style.display = 'none';
+					}
+
+					function likedPost() {
+						var numLikes = <?php echo $like_check_num; ?>;
+						var element = document.getElementById("like-btn<?php echo $id; ?>");
+						element.style.color = "#dd123d";
+						element.innerHTML = "<i class='far fa-thumbs-up'></i> Liked (" + numLikes + ")</button>";
+
+					}
+
+					function toggle<?php echo $id; ?>() {
+						var element = document.getElementById("toggleComment<?php echo $id; ?>");
+
+						if (element.style.display == "block")
+							element.style.display = "none";
+						else
+							element.style.display = "block";
+					}
+
+					function deletePost<?php echo $id; ?>() {
+						var postid = '<?php echo $id; ?>'
+						var modal = document.getElementById("modal<?php echo $id; ?>");
+
+						//alert('delete button ' + postid);
+						var xhr = new XMLHttpRequest();
+						xhr.onreadystatechange = function() {
+							if (this.readyState == 4 && this.status == 200) {
+								modal.style.display = 'none';
+								window.location.reload(true);
+							}
+						}
+						xhr.open("GET", "includes/handlers/ajax_delete_posts.php?&postid=" + postid, true);
+						xhr.send();
+					}
+
+
+					function likePost<?php echo $id; ?>() {
+						var postid = <?php echo $id; ?>;
+						var btn = document.getElementById("like-btn<?php echo $id; ?>");
+						//alert("Post id: " + postid);	
+						var xhr = new XMLHttpRequest();
+						xhr.onreadystatechange = function() {
+							if (this.readyState == 4 && this.status == 200) {
+								// btn.style.color = "red";
+								// btn.innerHTML = "<i class='far fa-thumbs-up'></i> Liked";
+								var statusMessage = this.responseText;
+								var result = JSON.parse(statusMessage);
+								//console.log(result);
+								if (result[1] == "Liked") {
+									btn.style.color = "#dd123d";
+									btn.innerHTML = "<i class='far fa-thumbs-up'></i> Liked (" + result[0] + ")";
+								} else //if (result[1] == "Like") 
+								{
+									btn.style.color = "#000";
+									btn.innerHTML = "<i class='far fa-thumbs-up'></i> Like (" + result[0] + ")";
+								}
+							}
+						}
+						xhr.open("GET", "includes/handlers/ajax_like_posts.php?&postid=" + postid, true);
+						xhr.send();
+
+
+					}
+
+					function postComment<?php echo $id; ?>() {
+						var textbox = document.getElementById("post_body<?php echo $id; ?>");
+						var postBody = document.getElementById("post_body<?php echo $id; ?>").value;
+						var postid = document.getElementById("post_id<?php echo $id; ?>").value;
+						var successMsg = document.getElementById("success<?php echo $id; ?>");
+
+						if (postBody != "") {
+							var xhr = new XMLHttpRequest();
+							xhr.onreadystatechange = function() {
+								if (this.readyState == 4 && this.status == 200) {
+									successMsg.style.display = "block";
+									successMsg.innerHTML = this.responseText;
+									setTimeout(function() {
+										successMsg.style.display = "none"
+									}, 3000);
+									textbox.value = '';
+								}
+							}
+							xhr.open("GET", "includes/handlers/ajax_post_comments.php?postBody=" + postBody + "&postid=" + postid, true);
+							xhr.send();
+							postBody.value = "";
+						} else {
+							successMsg.innerHTML = "Type Comment First";
+							successMsg.style.display = "block";
+							setTimeout(function() {
+								successMsg.style.display = "none"
+							}, 3000);
+						}
+
+
+					}
+				</script>
+
+<?php
 			} //End while loop
 
 			if ($count > $limit)

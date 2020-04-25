@@ -19,7 +19,10 @@ if (isset($_SESSION['username'])) {
 	<title>Welcome to Socialnet</title>
 
 	<script src="assets/js/jquery.min.js"></script>
+	<!-- <script src="assets/js/bootstrap.js"></script>
+	<script src="assets/js/bootbox.min.js"></script> -->
 
+	<!-- <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css"> -->
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css?v=<?php echo time(); ?>">
 	<link rel="stylesheet" type="text/css" href="assets/css/all.min.css">
 

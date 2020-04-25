@@ -2,6 +2,12 @@
 include("includes/header.php");
 include("includes/classes/User.php");
 include("includes/classes/Post.php");
+require 'includes/form_handlers/profile_post.php';
+
+// if (isset($_POST['post'])) {
+//     $post = new Post($con, $userLoggedIn);
+//     $post->submitPost($_POST['post_text'], $_POST['user_to']);
+// }
 
 if (isset($_GET['profile_username'])) {
     $username = $_GET['profile_username'];
@@ -28,6 +34,8 @@ if (isset($_POST['cancel_request'])) {
 if (isset($_POST['respond_request'])) {
     header("Location: request.php");
 }
+
+
 
 ?>
 
@@ -61,6 +69,29 @@ if (isset($_POST['respond_request'])) {
         </form>
     </div>
 </div>
+
+<div class="profile-wrapper">
+    <div class="user-info">
+        <p class="num-posts"><i class="fas fa-newspaper"></i>&nbsp;&nbsp;&nbsp;Posts: <?php echo $user_obj->getNumPosts(); ?></p>
+        <p class="num-posts"><i class="fas fa-thumbs-up"></i>&nbsp;&nbsp;&nbsp;Likes: <?php echo $user_obj->getNumLikes(); ?></p>
+        <p class="num-posts"><i class="fas fa-users"></i>&nbsp;&nbsp;&nbsp;Friends: <?php echo $user_obj->getNumFriends(); ?></p>
+    </div>
+    <div class="profile-posts">
+        <div class="post-from-profile">
+            <div class="loggedIn-img">
+                <a href="<?php echo $userLoggedIn; ?>">
+                    <img src="<?php echo $logged_in_user_obj->getProfilePic(); ?>">
+                </a>
+            </div>
+            <form action="<?php echo $username; ?>" method="POST">
+                <textarea name="post_text" id="post_text" placeholder="Write something to <?php echo $user_obj->getFirstAndLastName(); ?>"></textarea>
+                <input type="hidden" name="user_to" value="<?php echo $user_obj->getUsername(); ?>">
+                <input type="submit" name="post" id="post" value="Post">
+            </form>
+        </div>
+    </div>
+</div>
+
 
 
 </body>

@@ -31,6 +31,11 @@ class User
 		return $this->user['friend_array'];
 	}
 
+	public function getNumLikes()
+	{
+		return $this->user['num_likes'];
+	}
+
 	public function getNumPosts()
 	{
 		$username = $this->user['username'];
