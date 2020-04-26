@@ -578,6 +578,16 @@ header .tools a:hover {
   outline: none;
 }
 
+.profile-wrapper .profile-posts .status-post {
+  width: 100%;
+  margin: 10px 0 0px 0;
+}
+
+.profile-wrapper .profile-posts .posts-section .comment-container {
+  width: 100%;
+  margin-left: 0%;
+}
+
 /* user closed */
 .userclosed {
   top: 50%;

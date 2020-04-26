@@ -115,4 +115,25 @@ class User
 		$user_from = $this->user['username'];
 		$query = mysqli_query($this->con, "DELETE FROM  friend_requests WHERE user_to = '$user_to' AND user_from = '$user_from'");
 	}
+
+	public function getMutualFriends($user_to_check)
+	{
+		$mutualFriends = 0;
+		$user_array = $this->user['friend_array'];
+		$user_array_explode = explode(",", $user_array);
+
+		$query = mysqli_query($this->con, "SELECT friend_array FROM users WHERE username='$user_to_check'");
+		$row = mysqli_fetch_array($query);
+		$user_to_check_array = $row['friend_array'];
+		$user_to_check_array_explode = explode(",", $user_to_check_array);
+
+		foreach ($user_array_explode as $i) {
+			foreach ($user_to_check_array_explode as $j) {
+				if ($i == $j && $i != "") {
+					$mutualFriends++;
+				}
+			}
+		}
+		return $mutualFriends;
+	}
 }

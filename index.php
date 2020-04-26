@@ -12,8 +12,6 @@ if (isset($_POST['post'])) {
 
 
 ?>
-
-</div>
 <div class="post">
 	<div class="profile-image">
 		<a href="<?php echo $userLoggedIn; ?>">
@@ -90,7 +88,7 @@ if (isset($_POST['post'])) {
 
 
 
-</div>
+
 </body>
 
 </html>

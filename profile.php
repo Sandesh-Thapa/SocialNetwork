@@ -75,6 +75,10 @@ if (isset($_POST['respond_request'])) {
         <p class="num-posts"><i class="fas fa-newspaper"></i>&nbsp;&nbsp;&nbsp;Posts: <?php echo $user_obj->getNumPosts(); ?></p>
         <p class="num-posts"><i class="fas fa-thumbs-up"></i>&nbsp;&nbsp;&nbsp;Likes: <?php echo $user_obj->getNumLikes(); ?></p>
         <p class="num-posts"><i class="fas fa-users"></i>&nbsp;&nbsp;&nbsp;Friends: <?php echo $user_obj->getNumFriends(); ?></p>
+        <?php if ($userLoggedIn != $username) {
+            echo "<p class='num-posts'><i class='fas fa-user-friends'></i>&nbsp;&nbsp;&nbsp;Mutual Friends:" . $logged_in_user_obj->getMutualFriends($username) . " </p>";
+        }
+        ?>
     </div>
     <div class="profile-posts">
         <div class="post-from-profile">
@@ -89,9 +93,68 @@ if (isset($_POST['respond_request'])) {
                 <input type="submit" name="post" id="post" value="Post">
             </form>
         </div>
+        <div class="posts-section" id="load-data"></div>
+        <div id="loading" class="load-message">
+            <img src='assets/images/icons/loading.gif'>
+            <p>Loading Posts ....</p>
+        </div>
     </div>
 </div>
 
+<script>
+    var userLoggedIn = '<?php echo $userLoggedIn; ?>';
+    var profileUsername = '<?php echo $username; ?>';
+
+    $(document).ready(function() {
+
+        $('#loading').show();
+
+        //Original ajax request for loading first posts 
+        $.ajax({
+            url: "includes/handlers/ajax_load_profile_posts.php",
+            type: "POST",
+            data: "page=1&userLoggedIn=" + userLoggedIn + "&profileUsername=" + profileUsername,
+            cache: false,
+
+            success: function(data) {
+                $('#loading').hide();
+                $('#load-data').html(data);
+            }
+        });
+
+        $(window).scroll(function() {
+            var height = $('#load-data').height(); //Div containing posts
+            var scroll_top = $(this).scrollTop();
+            var page = $('#load-data').find('.nextPage').val();
+            var noMorePosts = $('#load-data').find('.noMorePosts').val();
+
+            if ((document.body.scrollHeight == document.body.scrollTop + window.innerHeight) && noMorePosts == 'false') {
+                $('#loading').show();
+
+                var ajaxReq = $.ajax({
+                    url: "includes/handlers/ajax_load_profile_posts.php",
+                    type: "POST",
+                    data: "page=" + page + "&userLoggedIn=" + userLoggedIn + "&profileUsername=" + profileUsername,
+                    cache: false,
+
+                    success: function(response) {
+                        $('#load-data').find('.nextPage').remove(); //Removes current .nextpage 
+                        $('#load-data').find('.noMorePosts').remove();
+
+                        $('#loading').hide();
+                        $('#load-data').append(response);
+                    }
+                });
+
+            } //End if 
+
+            return false;
+
+        }); //End (window).scroll(function())
+
+
+    });
+</script>
 
 
 </body>
