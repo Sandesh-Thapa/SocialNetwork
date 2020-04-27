@@ -688,3 +688,73 @@ header .tools a:hover {
 .friend-requests .all-friend-requests form .ignore-btn {
   border: 1px solid #ccc;
 }
+
+/* upload page */
+.upload-container {
+  width: 50%;
+  margin: 80px auto 0 auto;
+}
+
+.upload-container .upload-title h2 {
+  text-align: center;
+  padding: 5px;
+  background: #ccc;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  font-size: 18px;
+  color: rgb(63, 63, 63);
+  font-weight: 300;
+}
+
+.upload-container .upload-info {
+  border: 1px solid #ccc;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.upload-container .upload-info .img-container {
+  padding: 5px;
+}
+
+.upload-container .upload-info .img-container img {
+  width: 100%;
+}
+
+.upload-container .upload-info .profile-img {
+  text-align: center;
+}
+
+.upload-container .upload-info .profile-img img {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  border: 3px solid #ccc;
+}
+
+.upload-container .upload-info form {
+  border-top: 1px solid #ccc;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.upload-container .upload-info form button {
+  padding: 5px 20px;
+  margin-top: 5px;
+  background: #dd123d;
+  border: none;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.upload-container .upload-info form input[type="file"] {
+  padding: 5px;
+  margin-top: 5px;
+}
+
+.upload-container .upload-info form button:hover {
+  background: #ccc;
+  color: rgb(63, 63, 63);
+}

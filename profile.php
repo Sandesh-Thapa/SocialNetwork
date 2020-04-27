@@ -35,6 +35,14 @@ if (isset($_POST['respond_request'])) {
     header("Location: request.php");
 }
 
+if (isset($_POST['change_cover_pic'])) {
+    header("Location: upload.php?up=cover");
+}
+
+if (isset($_POST['change_profile_pic'])) {
+    header("Location: upload.php?up=profile");
+}
+
 
 
 ?>
@@ -64,6 +72,9 @@ if (isset($_POST['respond_request'])) {
                     echo '<button type="submit" name="cancel_request" class="btn remove-request"><i class="fas fa-user-times"></i> Cancel Request</button>';
                 } else
                     echo '<button type="submit" name="send_request" class="btn send-request"><i class="fas fa-user-plus"></i> Add Friend</button>';
+            } else {
+                echo '<button type="submit" name="change_cover_pic" class="btn"><i class="fas fa-camera"></i> Change Cover Photo</button> <br><br>';
+                echo '<button type="submit" name="change_profile_pic" class="btn"><i class="fas fa-camera"></i> Change Profile Picture</button>';
             }
             ?>
         </form>
