@@ -758,3 +758,12 @@ header .tools a:hover {
   background: #ccc;
   color: rgb(63, 63, 63);
 }
+
+/* settings page */
+.settings-wrapper {
+  margin-top: 50px;
+}
+
+.settings-wrapper .change-button a {
+  text-decoration: none;
+}
