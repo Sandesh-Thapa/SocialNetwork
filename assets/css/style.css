@@ -761,9 +761,181 @@ header .tools a:hover {
 
 /* settings page */
 .settings-wrapper {
-  margin-top: 50px;
+  margin-top: 60px;
+  margin-bottom: 100px;
+}
+
+.settings-wrapper .settings-container {
+  width: 60%;
+  margin: 0 auto;
+  background: #fff;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.settings-wrapper .settings-container h4 {
+  text-align: center;
+  font-weight: 500;
+  font-size: 20px;
+}
+
+.settings-wrapper .settings-container input[type="submit"] {
+  width: 100%;
+  margin-top: 10px;
+  padding: 5px;
+  color: #fff;
+  background: #dd123d;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  outline: none;
+}
+
+.settings-wrapper .settings-container input[type="submit"]:hover {
+  background: #f75c7d;
+  color: #ccc;
+}
+
+.settings-wrapper .settings-container h5 {
+  text-align: center;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.settings-wrapper .settings-container .config .profile-images {
+  display: flex;
+  margin-top: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.settings-wrapper .settings-container .config .profile-images img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 3px solid #e9ebee;
+}
+
+.settings-wrapper .change-button {
+  margin-left: 10px;
 }
 
 .settings-wrapper .change-button a {
   text-decoration: none;
+  color: #000;
+  background: #e9ebee;
+  padding: 5px 15px;
+  cursor: pointer;
+  border: none;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.settings-wrapper .settings-container .profile-details {
+  margin-top: 30px;
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.settings-wrapper .settings-container .profile-details form {
+  display: flex;
+  flex-direction: column;
+}
+
+.settings-wrapper .settings-container .profile-details form input[type="text"],
+.settings-wrapper
+  .settings-container
+  .profile-details
+  form
+  input[type="email"] {
+  margin-bottom: 15px;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+.settings-wrapper .settings-container label {
+  font-weight: 300;
+  font-size: 14px;
+}
+
+.settings-wrapper .settings-container .password {
+  margin-top: 50px;
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.settings-wrapper .settings-container .password form {
+  display: flex;
+  flex-direction: column;
+}
+
+.settings-wrapper .settings-container .password form input[type="password"] {
+  margin-bottom: 15px;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+.settings-wrapper .settings-container .close-account {
+  margin-top: 50px;
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+/* close account */
+.close-account-wrapper {
+  margin-top: 70px;
+}
+
+.close-account-wrapper .close-account-container {
+  background: #fff;
+  margin: 0 auto;
+  width: 60%;
+  text-align: center;
+  border-radius: 5px;
+  padding: 15px;
+}
+
+.close-account-wrapper .close-account-container h3 {
+  margin-bottom: 20px;
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+.close-account-wrapper .close-account-container .close-message {
+  margin: 10px 0;
+  padding-bottom: 20px;
+}
+
+.close-account-wrapper .close-account-container .close-message h4 {
+  margin: 20px 0;
+  font-size: 1.3rem;
+  font-weight: 500;
+}
+
+.close-account-wrapper .close-account-container .close-message p {
+  font-weight: 500;
+  color: rgb(89, 89, 89);
+}
+
+.close-account-wrapper .close-account-container input[type="submit"] {
+  width: 200px;
+  cursor: pointer;
+  padding: 5px;
+  border: none;
+  background: #dd123d;
+  color: #fff;
+  border-radius: 10px;
+  margin: 0 5px;
+}
+
+.close-account-wrapper .close-account-container input[type="submit"]:hover {
+  background: #f75c7d;
+  color: #ccc;
 }
