@@ -35,9 +35,9 @@ if (isset($_SESSION['username'])) {
 				<h1>Socialnet</h1>
 			</div>
 			<div class="searchbar">
-				<form method="post">
-					<input type="text" name="" id="" placeholder="Search" />
-					<button type="submit"><i class="fas fa-search"></i></button>
+				<form action="search.php" method="GET" name="search_form">
+					<input type="text" onkeyup="getLiveSearchUsers(this.value, '<?php echo $userLoggedIn ?>')" name="q" placeholder="Search" autocomplete="off" id="searchTextInput" />
+					<button><i class="fas fa-search"></i></button>
 				</form>
 			</div>
 			<div class="tools">
