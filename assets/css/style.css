@@ -967,6 +967,16 @@ header .tools a:hover {
   margin: 0 20px;
 }
 
+.chat-header .chat-container .left-panel .user-details .new-message {
+  text-decoration: none;
+  margin-left: 10px;
+  font-size: 12px;
+  color: #000;
+  background: #e9ebee;
+  padding: 5px;
+  border-radius: 3px;
+}
+
 .chat-header .chat-container .main-panel {
   width: 100%;
   border: 1px solid #e9ebee;
@@ -998,14 +1008,64 @@ header .tools a:hover {
 }
 
 .chat-header .chat-container .main-panel .chat-head .search-results {
+  background: #fff;
   position: absolute;
-  background: red;
-  margin-left: 350px;
-  margin-top: 35px;
-  border-radius: 5px;
-  width: 490px;
-  padding: 5px;
-  display: none;
+  top: 18vh;
+  left: 52vw;
+  width: 500px;
+}
+
+.chat-header
+  .chat-container
+  .main-panel
+  .chat-head
+  .search-results
+  .result-display {
+  margin: 5px;
+  border-radius: 10px;
+}
+
+.chat-header
+  .chat-container
+  .main-panel
+  .chat-head
+  .search-results
+  .result-display
+  a {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+
+.chat-header
+  .chat-container
+  .main-panel
+  .chat-head
+  .search-results
+  .result-display
+  h5 {
+  color: #000;
+  font-size: 16px;
+}
+
+.chat-header
+  .chat-container
+  .main-panel
+  .chat-head
+  .search-results
+  .result-display
+  p {
+  font-size: 12px;
+  color: rgb(83, 83, 83);
+}
+
+.chat-header
+  .chat-container
+  .main-panel
+  .chat-head
+  .search-results
+  .result-display:hover {
+  background: #ccc;
 }
 
 .chat-body {

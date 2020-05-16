@@ -43,6 +43,10 @@ if (isset($_POST['change_profile_pic'])) {
     header("Location: upload.php?up=profile");
 }
 
+if (isset($_POST['message_friend'])) {
+    header("Location: messages.php?u=$username");
+}
+
 
 
 ?>
@@ -65,6 +69,7 @@ if (isset($_POST['change_profile_pic'])) {
 
             if ($userLoggedIn != $username) {
                 if ($logged_in_user_obj->isFriend($username)) {
+                    echo '<button type="submit" name="message_friend" class="btn remove-friend"><i class="fas fa-envelope"></i> Message</button><br><br>';
                     echo '<button type="submit" name="remove_friend" class="btn remove-friend"><i class="fas fa-user-minus"></i> Unfriend</button>';
                 } elseif ($logged_in_user_obj->didReceiveRequest($username)) {
                     echo '<button type="submit" name="respond_request" class="btn confirm-friend"><i class="fas fa-user-edit"></i> Respond to Friend Request</button>';

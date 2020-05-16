@@ -21,6 +21,7 @@ else {
             <div class="user-details">
                 <a href="<?php echo $userLoggedIn ?>"> <img src="<?php echo $user['profile_pic']; ?>"> </a>
                 <h2>Chats</h2>
+                <a href="messages.php?u=new" class="new-message"><i class="fas fa-envelope"></i> New message</a>
             </div>
         </div>
         <div class="main-panel">
@@ -65,7 +66,9 @@ else {
 
 <?php } else {
                     echo "<h4 style='margin-top: 10px;'>Search the friend you would like to message</h4>";
-                    echo "<input type='text' placeholder='Search friend...' autocomplete='off'>";
+?>
+    <input type='text' placeholder='Search friend...' autocomplete='off' onkeyup='getUsers(this.value, "<?php echo $userLoggedIn; ?>")' name='q' id="searchFriends">
+<?php
                     echo "<div class='search-results'></div>";
                 }
 
@@ -136,6 +139,19 @@ else {
             }
             position = scroll;
         });
+    }
+
+    function getUsers(value, user) {
+        $.post(
+            "includes/handlers/ajax_friend_search.php", {
+                query: value,
+                userLoggedIn: user
+            },
+            function(data) {
+                $(".search-results").css('display', 'block');
+                $(".search-results").html(data);
+            }
+        );
     }
 
 
