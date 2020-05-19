@@ -97,6 +97,67 @@ header .tools a:hover {
   color: rgb(99, 98, 98);
 }
 
+.dropdown-data-window {
+  background: #fff;
+  overflow-y: scroll;
+  width: 400px;
+  position: fixed;
+  z-index: 1;
+  right: 100px;
+  top: 50px;
+}
+
+.dropdown-data-window a {
+  text-decoration: none;
+  display: flex;
+  border-bottom: 1px solid #e9ebee;
+  padding: 5px;
+}
+
+.dropdown-data-window a:hover {
+  background: #e9ebee;
+}
+
+.dropdown-data-window .chat-details {
+  margin-left: 10px;
+}
+
+.dropdown-data-window .chat-details .chatDetails {
+  display: flex;
+  align-items: center;
+}
+
+.dropdown-data-window .chat-details h5 {
+  font-size: 16px;
+  color: #000;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-top: 10px;
+}
+
+.dropdown-data-window .chat-details p {
+  color: rgb(83, 83, 83);
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.dropdown-data-window .chat-details span {
+  font-size: 12px;
+  color: #ccc;
+  margin-left: 30px;
+}
+
+.dropdown-data-window a {
+  display: flex;
+  text-decoration: none;
+}
+
+.dropdown-data-window img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 0.5px solid #e9ebee;
+}
+
 /* index */
 
 .post {
