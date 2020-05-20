@@ -97,6 +97,19 @@ header .tools a:hover {
   color: rgb(99, 98, 98);
 }
 
+header .notification-badge {
+  padding: 3px 7px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+  background-color: #f00;
+  border-radius: 50%;
+  position: absolute;
+  margin-left: -15px;
+  top: 5px;
+}
+
 .dropdown-data-window {
   background: #fff;
   overflow-y: scroll;

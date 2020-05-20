@@ -1,5 +1,9 @@
 <?php
 require 'config/config.php';
+include("classes/User.php");
+include("classes/Post.php");
+include("classes/Message.php");
+include("classes/Notification.php");
 
 
 if (isset($_SESSION['username'])) {
@@ -38,16 +42,47 @@ if (isset($_SESSION['username'])) {
 				</form>
 			</div>
 			<div class="tools">
+
+				<?php
+				//unread messages
+				$messages = new Message($con, $userLoggedIn);
+				$num_messages = $messages->getUnreadNumber();
+
+				//unread notifications
+				$notifications = new Notification($con, $userLoggedIn);
+				$num_notifications = $notifications->getUnreadNumber();
+				?>
+
 				<a href="<?php echo $userLoggedIn; ?>" class="name" title="Profile">
 					<img src="<?php echo $user['profile_pic']; ?>">
 					<?php echo $user['first_name']; ?>
 				</a>
-				<a href="index.php" title="Home"> <i class="fas fa-home"></i></a>
-				<a href="request.php" title="Friend Request"> <i class="fas fa-user-friends"></i></a>
-				<a href="javascript:void(0);" title="Messsage" onclick="getDropdownData('<?php echo $userLoggedIn; ?>', 'message')"> <i class="fas fa-envelope"></i></a>
-				<a href="#" title="Notification"> <i class="fas fa-bell"></i></a>
-				<a href="settings.php" title="Settings"> <i class="fas fa-cog"></i></a>
-				<a href="includes/handlers/logout.php" title="Log out"> <i class="fas fa-sign-out-alt"></i></a>
+				<a href="index.php" title="Home">
+					<i class="fas fa-home"></i>
+				</a>
+				<a href="request.php" title="Friend Request">
+					<i class="fas fa-user-friends"></i>
+				</a>
+				<a href="javascript:void(0);" onclick="getDropdownData('<?php echo $userLoggedIn; ?>', 'message')" title="Messsage">
+					<i class="fas fa-envelope"></i>
+					<?php
+					if ($num_messages > 0)
+						echo '<span class="notification-badge" id="unread_message">' . $num_messages . '</span>';
+					?>
+				</a>
+				<a href="javascript:void(0);" onclick="getDropdownData('<?php echo $userLoggedIn; ?>', 'notification')" title="Notification">
+					<i class="fas fa-bell"></i>
+					<?php
+					if ($num_notifications > 0)
+						echo '<span class="notification-badge" id="unread_notification">' . $num_notifications . '</span>';
+					?>
+				</a>
+				<a href="settings.php" title="Settings">
+					<i class="fas fa-cog"></i>
+				</a>
+				<a href="includes/handlers/logout.php" title="Log out">
+					<i class="fas fa-sign-out-alt"></i>
+				</a>
 			</div>
 		</div>
 	</header>

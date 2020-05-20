@@ -1,6 +1,5 @@
 <?php
 include("includes/header.php");
-include("includes/classes/User.php");
 ?>
 <div class="friend-requests">
     <div class="request-container">

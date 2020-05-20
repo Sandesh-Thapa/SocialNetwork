@@ -1,6 +1,5 @@
 <?php
 include("includes/header.php");
-include("includes/classes/User.php");
 
 $user_obj = new User($con, $userLoggedIn);
 
