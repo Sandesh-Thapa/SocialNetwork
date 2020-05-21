@@ -171,6 +171,23 @@ header .notification-badge {
   border: 0.5px solid #e9ebee;
 }
 
+.dropdown-data-window .result-display-notification {
+  display: flex;
+  color: rgb(83, 83, 83);
+  align-items: center;
+}
+
+.dropdown-data-window .result-display-notification p {
+  margin-left: 10px;
+  width: 70%;
+  font-size: 14px;
+}
+
+.dropdown-data-window .result-display-notification span {
+  font-size: 12px;
+  color: #ccc;
+}
+
 /* index */
 
 .post {

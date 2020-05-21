@@ -38,7 +38,7 @@ if (isset($_SESSION['username'])) {
 			<div class="searchbar">
 				<form action="search.php" method="GET" name="search_form">
 					<input type="text" onkeyup="getLiveSearchUsers(this.value, '<?php echo $userLoggedIn ?>')" name="q" placeholder="Search" autocomplete="off" id="searchTextInput" />
-					<button><i class="fas fa-search"></i></button>
+					<button id="searchLive"><i class="fas fa-search"></i></button>
 				</form>
 			</div>
 			<div class="tools">
@@ -51,6 +51,10 @@ if (isset($_SESSION['username'])) {
 				//unread notifications
 				$notifications = new Notification($con, $userLoggedIn);
 				$num_notifications = $notifications->getUnreadNumber();
+
+				//unread notifications
+				$user_obj = new User($con, $userLoggedIn);
+				$num_requests = $user_obj->getNumberOfFriendRequests();
 				?>
 
 				<a href="<?php echo $userLoggedIn; ?>" class="name" title="Profile">
@@ -62,6 +66,10 @@ if (isset($_SESSION['username'])) {
 				</a>
 				<a href="request.php" title="Friend Request">
 					<i class="fas fa-user-friends"></i>
+					<?php
+					if ($num_requests > 0)
+						echo '<span class="notification-badge" id="unread_requests">' . $num_requests . '</span>';
+					?>
 				</a>
 				<a href="javascript:void(0);" onclick="getDropdownData('<?php echo $userLoggedIn; ?>', 'message')" title="Messsage">
 					<i class="fas fa-envelope"></i>
@@ -86,6 +94,8 @@ if (isset($_SESSION['username'])) {
 			</div>
 		</div>
 	</header>
+	<div class="search_results"></div>
+	<div class="search_results_footer_empty"></div>
 	<div class="dropdown-data-window" style="height:0px;"></div>
 	<input type="hidden" id="dropdown_data_type" value="">
 

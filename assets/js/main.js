@@ -1,3 +1,9 @@
+$(document).ready(function () {
+  $("#searchLive").on("click", function () {
+    document.search_form.submit();
+  });
+});
+
 function getDropdownData(user, type) {
   if ($(".dropdown-data-window").css("height") == "0px") {
     var pagename;
@@ -31,4 +37,30 @@ function getDropdownData(user, type) {
       height: "0px",
     });
   }
+}
+
+function getLiveSearchUsers(value, user) {
+  $.post(
+    "includes/handlers/ajax_search.php",
+    { query: value, userLoggedIn: user },
+    function (data) {
+      if ($(".search_results_footer_empty")[0]) {
+        $(".search_results_footer_empty").toggleClass("search_results_footer");
+        $(".search_results_footer_empty").toggleClass(
+          "search_results_footer_empty"
+        );
+      }
+
+      $(".search_results").html(data);
+      $(".search_results_footer").html(
+        "<a href='search.php?q=" + value + "'>See All Results</a>"
+      );
+
+      if ((data = "")) {
+        $(".search_results_footer").html("");
+        $(".search_results_footer").toggleClass("search_results_footer_empty");
+        $(".search_results_footer").toggleClass("search_results_footer");
+      }
+    }
+  );
 }
