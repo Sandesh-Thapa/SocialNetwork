@@ -17,7 +17,7 @@ else if (count($names) == 2)
 
 // if query has only one word, search for firstname or lastname
 else
-    $usersReturnedQuery = mysqli_query($con, "SELECT * FROM users WHERE (first_name LIKE '$names[0]%' AND last_name LIKE '$names[0]%') AND user_closed='no' LIMIT 8");
+    $usersReturnedQuery = mysqli_query($con, "SELECT * FROM users WHERE (first_name LIKE '$names[0]%' OR last_name LIKE '$names[0]%') AND user_closed='no' LIMIT 8");
 
 if ($query != "") {
     while ($row = mysqli_fetch_array($usersReturnedQuery)) {
@@ -28,11 +28,14 @@ if ($query != "") {
         else
             $mutual_friends = "";
 
-        echo "<div class='resultDisplay'>
+        echo "<div class='result-display'>
                 <a href='" . $row['username'] . "'>
-                    
+                    <img src='" . $row['profile_pic'] . "'>
+                    <div class='live-search-text'>
+                        <h4>" . $row['first_name'] . " " . $row['last_name'] . "</h4>
+                        <p>" . $mutual_friends . "</p>
+                    </div>
                 </a>
-              </div>
-            ";
+          </div>";
     }
 }

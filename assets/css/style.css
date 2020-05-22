@@ -188,6 +188,70 @@ header .notification-badge {
   color: #ccc;
 }
 
+.search_results {
+  background: #fff;
+  width: 32%;
+  position: fixed;
+  z-index: 1;
+  margin-top: 15px;
+  margin-left: 310px;
+}
+
+.search_results .result-display a {
+  display: flex;
+  text-decoration: none;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #dadada;
+}
+
+.search_results .result-display a:hover {
+  background: #ccc;
+}
+
+.search_results .result-display a img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.search_results .result-display a .live-search-text {
+  display: flex;
+  align-items: center;
+}
+
+.search_results .result-display a .live-search-text h4 {
+  margin-left: 5px;
+  margin-right: 10px;
+  font-size: 18px;
+  color: #000;
+  font-weight: 500;
+}
+
+.search_results .result-display a .live-search-text p {
+  font-size: 14px;
+  color: #8d8d8e;
+}
+
+.search_results_footer {
+  padding: 7px 4px 0px 4px;
+  width: 32%;
+  background: #fff;
+
+  border-top: none;
+  border: 1px solid #dadada;
+  text-align: center;
+  margin-left: 310px;
+  position: fixed;
+  z-index: 1;
+  margin-top: -12px;
+}
+
+.search_results_footer a {
+  color: #dd123d;
+  text-decoration: none;
+}
+
 /* index */
 
 .post {
