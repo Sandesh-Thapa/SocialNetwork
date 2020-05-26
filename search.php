@@ -40,40 +40,20 @@ if (isset($_GET['type'])) {
         else
             echo "<p style='text-align: center;'>" . mysqli_num_rows($usersReturnedQuery) . " results found.</p>";
 
-        echo "<p style='text-align: center;'>Try searching for :</p><a href='search.php?q=" . $query . "&type=name'>Names</a>, <a href='search.php?q=" . $query . "&type=username'>Usernames</a>";
+        echo "<p style='text-align: center;'>Try searching for : <a href='search.php?q=" . $query . "&type=name'>Names</a>, <a href='search.php?q=" . $query . "&type=username'>Usernames</a></p>";
 
         while ($row = mysqli_fetch_array($usersReturnedQuery)) {
             $user_obj = new User($con, $user['username']);
-            $button = "";
-            $mutual_friends = "";
 
-            if ($user['username'] != $row['username']) {
-                if ($user_obj->isFriend($row['username']))
-                    $button = "<button type='submit' name='" . $row['username'] . "' class='btn remove-friend'><i class='fas fa-user-minus'></i> Unfriend</button>";
-                else if ($user_obj->didReceiveRequest($row['username']))
-                    $button = "<button type='submit' name='" . $row['username'] . "' class='btn confirm-friend'><i class='fas fa-user-edit'></i> Respond to Friend Request</button>";
-                else if ($user_obj->didSendRequest($user['username']))
-                    $button = "<button type='submit' name='" . $row['username'] . "' class='btn remove-request'><i class='fas fa-user-times'></i> Cancel Request</button>";
-                else
-                    $button = "<button type='submit' name='" . $row['username'] . "'  class='btn send-request'><i class='fas fa-user-plus'></i> Add Friend</button>";
+            $mutual_friends = $user_obj->getMutualFriends($row['username']) . " mutual friends";
 
-                $mutual_friends = $user_obj->getMutualFriends($row['username']) . " mutual friends";
-            }
-
-            echo "<div class='search_result'>
-                    
+            echo "<a href='" . $row['username'] . "' class='search_result'>
                     <div class='result-profile-pic'>
-                        <a href='" . $row['username'] . "'>
-                            <img src='" . $row['profile_pic'] . "'>
-                        </a>
+                        <img src='" . $row['profile_pic'] . "'>
                     </div>
-                    <a href='" . $row['username'] . "'>" . $row['first_name'] . " " . $row['last_name'] . "</a>
+                    <h3>" . $row['first_name'] . " " . $row['last_name'] . "</h3>
                     <p>" . $mutual_friends . "</p>
-                    <div class='searchPageFriendsButtons'>
-                        <form method='POST'>" . $button . "</form>
-                    </div>
-
-                </div>";
+                </a>";
         }
     }
     ?>
