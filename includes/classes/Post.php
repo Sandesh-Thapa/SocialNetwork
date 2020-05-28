@@ -10,7 +10,7 @@ class Post
 		$this->user_obj = new User($con, $user);
 	}
 
-	public function submitPost($body, $user_to)
+	public function submitPost($body, $user_to, $imageName)
 	{
 		$body = strip_tags($body); //removes html tags 
 		$body = mysqli_real_escape_string($this->con, $body);
@@ -25,7 +25,7 @@ class Post
 
 					$link = preg_split("!&!", $value);
 					$value = preg_replace("!watch\?v=!", "embed/", $link[0]);
-					$value = "<br><iframe width=\'500\' height=\'315\' src=\'" . $value . "\'></iframe><br>";
+					$value = "<br><iframe class='youtube-frame' src=\'" . $value . "\'></iframe><br>";
 					$body_array[$key] = $value;
 				}
 			}
@@ -42,7 +42,7 @@ class Post
 			}
 
 			//insert post 
-			$query = mysqli_query($this->con, "INSERT INTO posts VALUES('', '$body', '$added_by', '$user_to', '$date_added', 'no', 'no', '0')");
+			$query = mysqli_query($this->con, "INSERT INTO posts VALUES('', '$body', '$added_by', '$user_to', '$date_added', 'no', 'no', '0', '$imageName')");
 			$returned_id = mysqli_insert_id($this->con);
 
 			//Insert notification 
@@ -83,6 +83,7 @@ class Post
 				$body = $row['body'];
 				$added_by = $row['added_by'];
 				$date_time = $row['date_added'];
+				$imagePath = $row['image'];
 
 				//Prepare user_to string so it can be included even if not posted to a user
 				if ($row['user_to'] == "none") {
@@ -194,6 +195,14 @@ class Post
 
 					$userLoggedProfilePic = $this->user_obj->getProfilePic();
 
+					if ($imagePath != "") {
+						$imageDiv = "<div class='postedImage'>
+										<img src='$imagePath'>
+									</div>";
+					} else {
+						$imageDiv = "";
+					}
+
 					$str .= "<div class='status-post'>
 								<div class='title'>
 									<div class='post-profile-pic'>
@@ -209,6 +218,8 @@ class Post
 								
 								<div class='post-body'>
 									$body
+									<br>
+									$imageDiv
 								</div>
 								<div class='line'></div>
 								<div class='like-comment'>

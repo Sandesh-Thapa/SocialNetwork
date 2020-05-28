@@ -90,7 +90,7 @@ if (isset($_POST['message_friend'])) {
         <p class="num-posts"><i class="fas fa-thumbs-up"></i>&nbsp;&nbsp;&nbsp;Likes: <?php echo $user_obj->getNumLikes(); ?></p>
         <p class="num-posts"><i class="fas fa-users"></i>&nbsp;&nbsp;&nbsp;Friends: <?php echo $user_obj->getNumFriends(); ?></p>
         <?php if ($userLoggedIn != $username) {
-            echo "<p class='num-posts'><i class='fas fa-user-friends'></i>&nbsp;&nbsp;&nbsp;Mutual Friends:" . $logged_in_user_obj->getMutualFriends($username) . " </p>";
+            echo "<p class='num-posts'><i class='fas fa-user-friends'></i>&nbsp;&nbsp;&nbsp;Mutual Friends: " . $logged_in_user_obj->getMutualFriends($username) . " </p>";
         }
         ?>
     </div>
