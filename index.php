@@ -20,6 +20,9 @@ if (isset($_POST['post'])) {
 
 		if (strtolower($imageFileType) != "jpeg" && strtolower($imageFileType) != "png" && strtolower($imageFileType) != "jpg") {
 			$errorMessage = "Sorry, only jpeg, jpg and png files are allowed";
+			echo "<script>
+					alert('" . $errorMessage . "');
+			</script>";
 			$uploadOk = 0;
 		}
 
@@ -37,9 +40,9 @@ if (isset($_POST['post'])) {
 		$post = new Post($con, $userLoggedIn);
 		$post->submitPost($_POST['post_text'], 'none', $imageName);
 	} else {
-		echo "<div style='text-align:center;'>
-				$errorMessage
-			</div>";
+		echo "<script>
+					alert('" . $errorMessage . "');
+			</script>";
 	}
 }
 
@@ -53,10 +56,11 @@ if (isset($_POST['post'])) {
 		</a>
 	</div>
 	<form action="index.php" class="form" method="POST" enctype="multipart/form-data">
-		<input type="file" name="fileToUpload" id="fileToUpload">
+		<input type="file" name="fileToUpload" id="fileToUpload" accept="image/*">
 		<textarea name="post_text" id="post_text" placeholder="What's on your mind, <?php echo $user['first_name']; ?>"></textarea>
 		<input type="submit" name="post" id="post" value="Post">
 	</form>
+	<button id="files"><i class="far fa-image"></i> Add Photo</button>
 </div>
 
 
@@ -68,7 +72,15 @@ if (isset($_POST['post'])) {
 
 
 <script>
+	var uploadBtn = document.getElementById("files");
 	var userLoggedIn = '<?php echo $userLoggedIn; ?>';
+
+	uploadBtn.addEventListener('click', () => {
+		document.getElementById("fileToUpload").click();
+		return false;
+	});
+
+
 	$(document).ready(function() {
 
 		$('#loading').show();

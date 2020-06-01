@@ -101,11 +101,13 @@ if (isset($_POST['message_friend'])) {
                     <img src="<?php echo $logged_in_user_obj->getProfilePic(); ?>">
                 </a>
             </div>
-            <form action="<?php echo $username; ?>" method="POST">
+            <form action="<?php echo $username; ?>" method="POST" enctype="multipart/form-data">
+                <input type="file" name="fileToUpload" id="fileToUploadProfile" accept="image/*">
                 <textarea name="post_text" id="post_text" placeholder="Write something to <?php echo $user_obj->getFirstAndLastName(); ?>"></textarea>
                 <input type="hidden" name="user_to" value="<?php echo $user_obj->getUsername(); ?>">
                 <input type="submit" name="post" id="post" value="Post">
             </form>
+            <button id="filesProfile"><i class="far fa-image"></i> Add Photo</button>
         </div>
         <div class="posts-section" id="load-data"></div>
         <div id="loading" class="load-message">
@@ -118,6 +120,12 @@ if (isset($_POST['message_friend'])) {
 <script>
     var userLoggedIn = '<?php echo $userLoggedIn; ?>';
     var profileUsername = '<?php echo $username; ?>';
+    var uploadBtn = document.getElementById("filesProfile");
+
+    uploadBtn.addEventListener('click', () => {
+        document.getElementById("fileToUploadProfile").click();
+        return false;
+    });
 
     $(document).ready(function() {
 

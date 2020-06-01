@@ -418,6 +418,7 @@ class Post
 				$body = $row['body'];
 				$added_by = $row['added_by'];
 				$date_time = $row['date_added'];
+				$imagePath = $row['image'];
 
 				if ($num_iterations++ < $start)
 					continue;
@@ -463,8 +464,9 @@ class Post
 				$start_date = new DateTime($date_time); //Time of post
 				$end_date = new DateTime($date_time_now); //Current time
 				$interval = $start_date->diff($end_date); //Difference between dates 
+
 				if ($interval->y >= 1) {
-					if ($interval == 1)
+					if ($interval->y == 1)
 						$time_message = $interval->y . " year ago"; //1 year ago
 					else
 						$time_message = $interval->y . " years ago"; //1+ year ago
@@ -511,6 +513,14 @@ class Post
 
 				$userLoggedProfilePic = $this->user_obj->getProfilePic();
 
+				if ($imagePath != "") {
+					$imageDiv = "<div class='postedImage'>
+										<img src='$imagePath'>
+									</div>";
+				} else {
+					$imageDiv = "";
+				}
+
 				$str .= "<div class='status-post'>
 								<div class='title'>
 									<div class='post-profile-pic'>
@@ -526,6 +536,8 @@ class Post
 								
 								<div class='post-body'>
 									$body
+									<br>
+									$imageDiv
 								</div>
 								<div class='line'></div>
 								<div class='like-comment'>
@@ -766,7 +778,7 @@ class Post
 				$end_date = new DateTime($date_time_now); //Current time
 				$interval = $start_date->diff($end_date); //Difference between dates 
 				if ($interval->y >= 1) {
-					if ($interval == 1)
+					if ($interval->y == 1)
 						$time_message = $interval->y . " year ago"; //1 year ago
 					else
 						$time_message = $interval->y . " years ago"; //1+ year ago
@@ -810,6 +822,7 @@ class Post
 						$time_message = $interval->s . " seconds ago";
 					}
 				}
+
 
 				$userLoggedProfilePic = $this->user_obj->getProfilePic();
 
